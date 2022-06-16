@@ -33,6 +33,11 @@ function BBRegister() {
       BBDataService.createBB(data)
     } else {
       console.log("wrong")
+      if (!valBBname.test(bbname)) console.log(bbname)
+      if (!valBBcity.test(bbcity)) console.log(bbcity)
+      if (!valBBtel.test(bbtel)) console.log(bbtel)
+      if (!valBBemail.test(bbemail)) console.log(bbemail)
+      if (!valBBpass.test(bbpass)) console.log(bbpass)
     }
     //console.log(bbname)
     //console.log(bbcity)
