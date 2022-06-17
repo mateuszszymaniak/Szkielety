@@ -3,6 +3,7 @@ import mongodb from "mongodb"
 import dotenv from "dotenv"
 import blood_bankDAO from "./dao/blood_bankDAO.js"
 import donorDAO from "./dao/donorDAO.js"
+import donationDAO from "./dao/donationDAO.js"
 
 dotenv.config()
 const MongoClient = mongodb.MongoClient
@@ -19,6 +20,7 @@ MongoClient.connect(
 .then(async client => {
     await blood_bankDAO.injectDB(client)
     await donorDAO.injectDB(client)
+    await donationDAO.injectDB(client)
     app.listen(port, () => {
         console.log(`listening on port ${port}`)
     })
