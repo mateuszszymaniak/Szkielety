@@ -1,13 +1,16 @@
 import React from "react";
-import {Switch, Route, Link} from "react-router-dom"
+// import {Switch, Route, Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// import BBCtr from "../../services/bloodbank";
 import BBRegister from "./bbRegister";
 import DocRegister from "./docRegister";
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 
+
 function Register() {
+
   return (
     <div className="App">
         <div class="container cont">

@@ -8,6 +8,8 @@ import Register from "./components/register/register.js"
 import Header from "./components/header";
 import Footer from "./components/footer";
 import WrongPage from "./components/wrongPage";
+import DonationList from "./components/donationlist";
+import AddBloodDonation from "./components/addBloodDon";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -52,6 +54,8 @@ function App() {
     <div className="container mt-3">
       <Switch>
         <Route exact path={["/"]} component={HomePage} />
+        <Route exact path = {"/donation_list"} component = {DonationList} />
+        <Route exact path = {"/add_donation"} component = {AddBloodDonation} />
         <Route exact path = {"/login"} component = {Login} />
         <Route exact path = {"/register"} component = {Register} />
         <Route exact path = {"*"} component = {WrongPage} />

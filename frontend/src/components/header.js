@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, Link} from "react-router-dom"
+import {Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import logo from "../images/logo.jpg"
@@ -16,12 +16,16 @@ function Header() {
         </Link>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
+                    <Link to="/donation_list">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-light" href="bbPage.php">Lista donacji</a>
+                        <a class="nav-link btn btn-light" href="">Lista donacji</a>
                     </li>
+                    </Link>
+                    <Link to="/add_donation">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-light" href="bbAddBlood.php">Dodaj donację</a>
+                        <a class="nav-link btn btn-light" href="">Dodaj donację</a>
                     </li>
+                    </Link>
                     <li class="nav-item">
                         <a class="nav-link btn btn-light" href="logout.php">Wyloguj</a>
                     </li>

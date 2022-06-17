@@ -10,7 +10,9 @@ export default class DonorController{
             filters.city = req.query.city
         } else if (req.query.blood_type){
             filters.blood_type = req.query.blood_type
-        }
+        } else if (req.query.email){
+            filters.email = req.query.email
+        } 
 
         const {donorsList, totalNumDonors} = await donorDAO.getDonors({
             filters,
