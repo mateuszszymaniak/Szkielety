@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState} from "react";
+import BBDataService from "../../services/bloodbank.js"
 
 function BBLogin() {
   
@@ -18,7 +19,16 @@ function BBLogin() {
         pass: bbpass
       }
       //TODO check post
-      // BBDataService.createBB(data)
+       BBDataService.getBBByEmail(bbemail).then(response => 
+        {
+          console.log(response.data);
+        })
+        .catch(e =>
+        {
+          console.log(e);
+        })
+       ;
+
     } else {
       console.log("wrong")
       if (!valBBemail.test(bbemail)) console.log(bbemail)

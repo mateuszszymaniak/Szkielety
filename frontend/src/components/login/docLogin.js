@@ -2,6 +2,7 @@ import React from "react";
 import {Switch, Route, Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState} from "react";
+import DDataService from "../../services/donor.js"
 
 function DocLogin() {
 
@@ -19,7 +20,15 @@ function try_login(){
       pass: donpass
     }
 //     //TODO check post
-    // DonorDataService.createD(data)
+DDataService.getDByEmail(donemail).then(response => 
+  {
+    console.log(response.data);
+  })
+  .catch(e =>
+  {
+    console.log(e);
+  })
+ ;
   } else {
     console.log("wrong")
     if (!valDemail.test(donemail)) console.log(donemail)

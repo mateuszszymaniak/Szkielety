@@ -24,9 +24,13 @@ export default class donorDAO{
         if (filters) {
             if("blood_type" in filters){
                 query = {"blood_type": {$eq: filters["blood_type"]}}
-            } else if ("city" in filters){
-                query = {"city": {$eq: filters["city"]}}
+            } else if ("email" in filters){
+                query = {"email": {$eq: filters["email"]}}
             }
+            else if ("city" in filters){
+                query = {"city": {$eq: filters["city"]}}
+            } 
+            
         }
 
         let cursor

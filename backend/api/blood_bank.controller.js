@@ -11,6 +11,9 @@ export default class Blood_bankController{
         } else if (req.query.name){
             filters.name = req.query.name
         }
+        else if (req.query.email){
+            filters.email = req.query.email
+        }
 
         const {blood_banksList, totalNumBlood_banks} = await blood_bankDAO.getBlood_banks({
             filters,
