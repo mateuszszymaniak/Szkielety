@@ -16,12 +16,16 @@ function Header() {
         </Link>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
+                    <Link to="/donation_list">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-light" href="bbPage.php">Lista donacji</a>
+                        <a class="nav-link btn btn-light" href="">Lista donacji</a>
                     </li>
+                    </Link>
+                    
                     <li class="nav-item">
                         <a class="nav-link btn btn-light" href="bbAddBlood.php">Dodaj donację</a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link btn btn-light" href="logout.php">Wyloguj</a>
                     </li>

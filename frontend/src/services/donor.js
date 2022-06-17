@@ -6,4 +6,4 @@ class DonorDataService{
     }
 }
 
-export default new DonorDataService;
+export default new DonorDataService();

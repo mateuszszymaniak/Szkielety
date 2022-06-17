@@ -11,4 +11,4 @@ class BloodbankDataService{
     }
 }
 
-export default new BloodbankDataService;
+export default new BloodbankDataService();

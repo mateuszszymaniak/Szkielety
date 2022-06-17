@@ -1,8 +1,8 @@
 import React from "react";
-import {Switch, Route, Link} from "react-router-dom"
+// import {Switch, Route, Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import BBCtr from "../../services/bloodbank";
+// import BBCtr from "../../services/bloodbank";
 import BBRegister from "./bbRegister";
 import DocRegister from "./docRegister";
 import Tabs from 'react-bootstrap/Tabs'
