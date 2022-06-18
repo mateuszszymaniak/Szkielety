@@ -12,6 +12,9 @@ class DonationDataService{
     getDonById(did = null) {
         return http.get(`/donation?did=${did}`);
       }
+      getDonByBBId(bbid = null) {
+        return http.get(`/donation?bbid=${bbid}`);
+      }
 }
 
 export default new DonationDataService();

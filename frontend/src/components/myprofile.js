@@ -54,6 +54,7 @@ useEffect(() => {
                         break;
                     }
                 }
+                console.log(donationlist.date)
                 rob[i] = {
                     nr: i,
                     date: donationlist[i].date,
