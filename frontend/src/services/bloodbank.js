@@ -12,6 +12,10 @@ class BloodbankDataService{
     getBBByEmail(email) {
         return http.get(`/blood_bank?email=${email}`);
       }
+
+    getBBById(bbid) {
+      return http.get(`/blood_bank?_id=${bbid}`);
+    }
 }
 
 export default new BloodbankDataService();

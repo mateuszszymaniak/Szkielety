@@ -1,59 +1,56 @@
 import donationDAO from "../dao/donationDAO.js"
 
 export default class DonationsController{
-    static async apiGetDonations(req, res, next){
-        console.log("getdon")
-    }
+
     
-    // static async apiGetDonors(req, res, next){
-    //     const donorsPerPage = req.query.donorsPerPage ? parseInt(req.query.donorsPerPage, 10) : 20
-    //     const page = req.query.page ? parseInt(req.query.page, 10) : 0
+    static async apiGetDonations(req, res, next){
+        const donationsPerPage = req.query.donationsPerPage ? parseInt(req.query.donationsPerPage, 10) : 20
+        const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
-    //     let filters = {}
-    //     if (req.query.city){
-    //         filters.city = req.query.city
-    //     } else if (req.query.blood_type){
-    //         filters.blood_type = req.query.blood_type
-    //     }
+        let filters = {}
+        if (req.query.bbid){
+            filters.bbid = req.query.bbid
+        } else if (req.query.did){
+            filters.did = req.query.did
+        }
 
-    //     const {donorsList, totalNumDonors} = await donorDAO.getDonors({
-    //         filters,
-    //         page,
-    //         donorsPerPage
-    //     })
+        const {donationsList, totalNumDonations} = await donationDAO.getDonations({
+            filters,
+            page,
+            donationsPerPage
+        })
 
-    //     let response = {
-    //         donors: donorsList,
-    //         page: page,
-    //         filters: filters,
-    //         entries_per_page: donorsPerPage,
-    //         total_results: totalNumDonors,
-    //     }
-    //     res.json(response)
-    // }
+        let response = {
+            donations: donationsList,
+            page: page,
+            filters: filters,
+            entries_per_page: donationsPerPage,
+            total_results: totalNumDonations,
+        }
+        res.json(response)
+    }
 
-    // static async apiPostDonors(req, res, next){
-    //     try{
-    //         const donor_name = req.body.name
-    //         const blood_type = req.body.blood_type
-    //         const city = req.body.city
-    //         const tel = req.body.tel
-    //         const email = req.body.email
-    //         const pass = req.body.pass
+    static async apiPostDonations(req, res, next){
+        try{
+            const did = req.body.did
+            const bbid = req.body.bbid
+            const vol = req.body.vol
+            const city = req.body.city
+            const date = req.body.date
+            
 
-    //         const PostResponse = await donorDAO.addDonor(
-    //             donor_name,
-    //             blood_type,
-    //             city,
-    //             tel,
-    //             email,
-    //             pass,
-    //         )
-    //         res.json({status: "success"})
-    //     } catch (e) {
-    //         res.status(500).json({error: e.message})
-    //     }
-    // }
+            const PostResponse = await donationDAO.addDonation(
+                did,
+                bbid,
+                vol,
+                city,
+                date,
+            )
+            res.json({status: "success"})
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
+    }
 
     // static async apiUpdateDonors(req, res, next){
     //     try{
@@ -89,17 +86,16 @@ export default class DonationsController{
     //     }
     // }
 
-    // static async apiDeleteDonors(req, res, next){
-    //     try{
-    //         const donorId = req.body.donor_id
-    //         const email = req.body.email
-    //         const deleteResponse = await donorDAO.deleteDonor(
-    //             donorId,
-    //             email
-    //         )
-    //         res.json({status: "success"})
-    //     } catch (e) {
-    //         res.status(500).json({error: e.message})
-    //     }
-    // }
+    static async apiDeleteDonations(req, res, next){
+        try{
+
+            const donationId = req.body.donid
+            const deleteResponse = await donationDAO.deleteDonation(
+                donationId
+            )
+            res.json({status: "success"})
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
+    }
 }

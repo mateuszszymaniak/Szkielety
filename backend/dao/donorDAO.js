@@ -84,11 +84,10 @@ export default class donorDAO{
         }
     }
 
-    static async deleteDonor(id, email){
+    static async deleteDonor(id){
         try{
             const deleteResponse = await donor.deleteOne({
-                _id: ObjectId(id),
-                email: email
+                _id: ObjectId(id)
             })
             return deleteResponse
         } catch (e) {

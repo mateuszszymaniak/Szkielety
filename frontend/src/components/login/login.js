@@ -6,8 +6,24 @@ import BBLogin from "./bbLogin";
 import DocLogin from "./docLogin";
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import { useState } from "react";
 
-function Login() {
+const Login = props => {
+    const initialUserState = {
+        name: "",
+        id: "",
+        type: "NL",
+      };
+    
+      const [user, setUser] = useState(initialUserState);
+    
+
+    const login = (par) => {
+        // console.log(par)
+        props.login(par)
+        props.history.push('/');
+}
+
   return (
     <div className="App">
         <div class="container cont">
@@ -20,11 +36,11 @@ function Login() {
                                 <Tabs defaultActiveKey="bb" class="nav nav-tabs justify-content-center bg-light">
                                     <Tab eventKey = "bb" title = "Bank krwi">
                                         <p></p>
-                                        <BBLogin/>
+                                        <BBLogin login = {login}/>
                                     </Tab>
                                     <Tab eventKey = "doc" title = "Dawca">
                                         <p></p>
-                                        <DocLogin/>
+                                        <DocLogin login = {login}/>
                                     </Tab>
                                 </Tabs>
                             </div>

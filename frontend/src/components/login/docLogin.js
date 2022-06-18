@@ -4,8 +4,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useState} from "react";
 import DDataService from "../../services/donor.js"
 
-function DocLogin() {
+const DocLogin = props => {
+  let user = {
+    name: "",
+    id: "",
+    type: "NL",
+  };
 
+  const login = (par) =>
+  {
+    // console.log(par);
+    props.login(par);
+  }
+  
+  
   const[donemail, setDemail] = useState("");
   const[donpass, setDpass] = useState("");
   
@@ -23,6 +35,20 @@ function try_login(){
 DDataService.getDByEmail(donemail).then(response => 
   {
     console.log(response.data);
+    if(response.data.donors[0].email == donemail && response.data.donors[0].pass == donpass)
+    {
+      
+      console.log("zalogowany")
+      user.name=response.data.donors[0].name
+      user.id=response.data.donors[0]._id
+      user.type="D"
+      // console.log(user);
+      login(user);
+    }
+    else
+    {
+      console.log("niezalogowany")
+    }
   })
   .catch(e =>
   {
