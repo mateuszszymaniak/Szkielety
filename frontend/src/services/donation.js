@@ -17,6 +17,7 @@ class DonationDataService{
       }
       deleteD(id)
       {
+        console.log(id)
         return http.delete(`/donation`, {data: {donid: id}})
       }
 }

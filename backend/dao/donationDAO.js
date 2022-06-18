@@ -82,6 +82,7 @@ export default class donationDAO {
 
             static async deleteDonation(id){
                 try{
+                    console.log(id);
                     const deleteResponse = await donation.deleteOne({
                         _id: ObjectId(id),
                     })

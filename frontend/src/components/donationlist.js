@@ -10,7 +10,6 @@ function DonationList() {
 
     const [bbid, setBbid] = useState(sessionStorage.getItem("_id"));
     const [donationlist, setDono] = useState([]);
-    const [donorlist, setDonorList] = useState([]);
     const [doPokazania, setPokaz] = useState([])
 
     
@@ -43,20 +42,21 @@ function DonationList() {
     }, []
     )
 
-
+    const [donorlist, setDonorList] = useState([]);
     useEffect(() => {
         if (donationlist.length > 0 && donorlist.length > 0
         ) {
             let rob = []
             for (let i = 0; i < donorlist.length; i++) {
                 let donations = []
-                let donation = {
-                    id: "",
-                    vol: "",
-                    date: "",
-                }
+                
                 for (let j = 0; j < donationlist.length; j++) {
                     if (donorlist[i]._id === donationlist[j].did) {
+                        let donation =  {
+                            id: "",
+                            vol: "",
+                            date: "",
+                        }
                         // console.log(i);
                         // console.log(donationlist[j]._id)
                         // console.log(donationlist[j].vol)
@@ -146,7 +146,7 @@ function DonationList() {
                                             <button type="submit" name="editDon" value="<?php echo $row['ID'];?>" class="btn btn-success">Edytuj</button>
                                         </form></td> */}
                                         <td><form >
-                                            <button name="delDon" onClick={() => deleteDonation(element.row.id)} class="btn btn-danger">Usuń</button>
+                                            <button name="delDon" onClick={() => deleteDonation(row.id)} class="btn btn-danger">Usuń</button>
                                         </form></td>
                                     </tr>
                                 </>

@@ -88,6 +88,7 @@ export default class DonationsController{
 
     static async apiDeleteDonations(req, res, next){
         try{
+
             const donationId = req.body.donid
             const deleteResponse = await donationDAO.deleteDonation(
                 donationId
