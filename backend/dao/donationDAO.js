@@ -80,16 +80,15 @@ export default class donationDAO {
         //         }
         //     }
 
-        //     static async deleteBlood_bank(id, email){
-        //         try{
-        //             const deleteResponse = await blood_bank.deleteOne({
-        //                 _id: ObjectId(id),
-        //                 email: email
-        //             })
-        //             return deleteResponse
-        //         } catch (e) {
-        //             console.error(`Unable to delete blood_bank: ${e}`)
-        //             return {error: e}
-        //         }
-        //     }
+            static async deleteDonation(id){
+                try{
+                    const deleteResponse = await donation.deleteOne({
+                        _id: ObjectId(id),
+                    })
+                    return deleteResponse
+                } catch (e) {
+                    console.error(`Unable to delete donation: ${e}`)
+                    return {error: e}
+                }
+            }
     }

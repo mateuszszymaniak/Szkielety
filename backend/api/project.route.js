@@ -21,6 +21,6 @@ router.route("/donors")
     .get(donations_Ctrl.apiGetDonations)
     .post(donations_Ctrl.apiPostDonations)
     // .put(donations_Ctrl.apiUpdateDonations)
-    // .delete(donations_Ctrl.apiDeleteDonations)
+    .delete(donations_Ctrl.apiDeleteDonations)
 
 export default router

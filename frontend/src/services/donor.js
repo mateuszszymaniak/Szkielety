@@ -13,6 +13,11 @@ class DonorDataService{
     getDByEmail(email) {
         return http.get(`/donors?email=${email}`);
       }
+    
+    deleteD(id)
+    {
+        return http.delete(`/donors`, {data: {donorId: id}})
+    }
 }
 
 export default new DonorDataService();

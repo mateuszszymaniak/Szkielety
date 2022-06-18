@@ -13,6 +13,16 @@ function DonationList() {
     const [donorlist, setDonorList] = useState([]);
     const [doPokazania, setPokaz] = useState([])
 
+    
+    function deleteDonor(id)
+    {
+        DonorDataService.deleteD(id)
+    }
+
+    function deleteDonation(id)
+    {
+        DonationDataService.deleteD(id)
+    }
 
     useEffect(() => {
         console.log("bbid " + bbid);
@@ -45,17 +55,26 @@ function DonationList() {
                     vol: "",
                     date: "",
                 }
-                let donationdate = []
                 for (let j = 0; j < donationlist.length; j++) {
                     if (donorlist[i]._id === donationlist[j].did) {
+                        // console.log(i);
+                        // console.log(donationlist[j]._id)
+                        // console.log(donationlist[j].vol)
+                        // console.log(donationlist[j].date)
+                        // console.log(donations)
+                        // console.log("#####")
                         donation.id = donationlist[j]._id
                         donation.vol = donationlist[j].vol
                         donation.date = donationlist[j].date
+                        console.log(donation)
                         donations.push(donation)
+                        // setDonations(donations)
+                        // console.log(donationsState)
                     }
                 }
                 rob[i] = {
                     nr: i + 1,
+                    donid: donorlist[i]._id,
                     donname: donorlist[i].name,
                     dontype: donorlist[i].blood_type,
                     dontel: donorlist[i].tel,
@@ -78,7 +97,7 @@ function DonationList() {
             <table class="table table-responsive table-striped rounded mb-5">
                 <tr><th colspan="8">Pobrana krew od dawców</th></tr>
                 <tr>
-                    <th>Numer donacji</th>
+                    <th>Numer dawcy</th>
                     <th>Imię i nazwisko dawcy</th>
                     <th>Grupa krwi dawcy</th>
                     <th>Numer telefonu dawcy</th>
@@ -101,9 +120,11 @@ function DonationList() {
                                     <button type="submit" name="editDon" value="<?php echo $row['ID'];?>" class="btn btn-success">Edytuj</button>
                                 </form>
                                 </th> */}
-                                <th><form action="forms/bbDelDon.php" method="post">
-                                    <button type="submit" name="delDon" value="<?php echo $row['ID'];?>" class="btn btn-danger">Usuń</button>
-                                </form></th>
+                                <th>
+                                    <form>
+                                    <button name="delDon" onClick={() => deleteDonor(element.donid)} class="btn btn-danger">Usuń</button>
+                                    </form>
+                                </th>
                             </tr>
                             <tr>
                                 <td></td>
@@ -124,8 +145,8 @@ function DonationList() {
                                         {/* <td><form action="bbEditDon.php" method="post">
                                             <button type="submit" name="editDon" value="<?php echo $row['ID'];?>" class="btn btn-success">Edytuj</button>
                                         </form></td> */}
-                                        <td><form action="forms/bbDelDon.php" method="post">
-                                            <button type="submit" name="delDon" value="<?php echo $row['ID'];?>" class="btn btn-danger">Usuń</button>
+                                        <td><form >
+                                            <button name="delDon" onClick={() => deleteDonation(element.row.id)} class="btn btn-danger">Usuń</button>
                                         </form></td>
                                     </tr>
                                 </>

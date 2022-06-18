@@ -15,6 +15,10 @@ class DonationDataService{
       getDonByBBId(bbid = null) {
         return http.get(`/donation?bbid=${bbid}`);
       }
+      deleteD(id)
+      {
+        return http.delete(`/donation`, {data: {donid: id}})
+      }
 }
 
 export default new DonationDataService();

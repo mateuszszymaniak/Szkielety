@@ -44,6 +44,7 @@ function addDonation()
             date: dondate,
           }
         DonationDataService.createDon(data)
+        window.location.href = '/?resultDono=success';
     }
     else
     {

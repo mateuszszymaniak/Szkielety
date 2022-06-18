@@ -89,11 +89,11 @@ export default class DonorController{
 
     static async apiDeleteDonors(req, res, next){
         try{
-            const donorId = req.body.donor_id
-            const email = req.body.email
+            
+            const donorId = req.body.donorId
+            console.log(donorId)
             const deleteResponse = await donorDAO.deleteDonor(
                 donorId,
-                email
             )
             res.json({status: "success"})
         } catch (e) {

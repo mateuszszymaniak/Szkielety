@@ -86,17 +86,15 @@ export default class DonationsController{
     //     }
     // }
 
-    // static async apiDeleteDonors(req, res, next){
-    //     try{
-    //         const donorId = req.body.donor_id
-    //         const email = req.body.email
-    //         const deleteResponse = await donorDAO.deleteDonor(
-    //             donorId,
-    //             email
-    //         )
-    //         res.json({status: "success"})
-    //     } catch (e) {
-    //         res.status(500).json({error: e.message})
-    //     }
-    // }
+    static async apiDeleteDonations(req, res, next){
+        try{
+            const donationId = req.body.donid
+            const deleteResponse = await donationDAO.deleteDonation(
+                donationId
+            )
+            res.json({status: "success"})
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
+    }
 }
