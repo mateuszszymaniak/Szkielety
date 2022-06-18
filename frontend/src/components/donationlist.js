@@ -1,9 +1,37 @@
 import React from "react";
 import {Switch, Route, Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
+import DonationDataService from "../services/donation"
+import BloodbankDataService from "../services/bloodbank"
 
 function DonationList()
 {
+    // useEffect(() =>
+    // {
+    //     let tablica = []
+    //     DonationDataService.getDonByIds(bbid, null).then( response =>
+    //         {
+    //             setDono(response.data.donations);
+    //             console.log(tablica)
+            
+    //         })
+    //         .catch(e =>
+    //         {
+    //             console.log(e);
+    //         });
+    //     BloodbankDataService.getBB(null, did).then( response =>
+    //             {
+    //                 setBBList(response.data.blood_banks);
+    //                 console.log(tablica)
+                
+    //             })
+    //             .catch(e =>
+    //             {
+    //                 console.log(e);
+    //             });
+    
+    //     },[]
+    // )
 
 return (
 <div class="container cont"> 

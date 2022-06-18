@@ -29,6 +29,9 @@ export default class blood_bankDAO{
             } else if ("email" in filters){
                 query = {"email": {$eq: filters["email"]}}
             }
+            else if ("_id" in filters){
+                query = {"_id": {$eq: filters["_id"]}}
+            }
         }
 
         let cursor

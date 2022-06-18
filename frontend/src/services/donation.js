@@ -9,6 +9,9 @@ class DonationDataService{
     {
         return http.get("/donation")
     }
+    getDonById(did = null) {
+        return http.get(`/donation?did=${did}`);
+      }
 }
 
 export default new DonationDataService();

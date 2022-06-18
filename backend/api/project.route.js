@@ -19,7 +19,7 @@ router.route("/donors")
 
     router.route("/donation")
     .get(donations_Ctrl.apiGetDonations)
-    // .post(donations_Ctrl.apiPostDonations)
+    .post(donations_Ctrl.apiPostDonations)
     // .put(donations_Ctrl.apiUpdateDonations)
     // .delete(donations_Ctrl.apiDeleteDonations)
 

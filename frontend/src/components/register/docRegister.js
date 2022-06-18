@@ -33,6 +33,7 @@ function DocRegister() {
       }
   //     //TODO check post
       DonorDataService.createD(data)
+      window.location.href = '/?resultReg=success';
     } else {
       console.log("wrong")
       if (!valDname.test(donname)) console.log(donname)
@@ -41,6 +42,7 @@ function DocRegister() {
       if (!valDcity.test(doncity)) console.log(doncity)
       if (!valDemail.test(donemail)) console.log(donemail)
       if (!valDpass.test(donpass) ) console.log(donpass)
+      window.location.href = '/?resultReg=failed';
     }
   }
   
