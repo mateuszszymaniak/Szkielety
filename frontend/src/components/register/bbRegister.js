@@ -10,7 +10,17 @@ function BBRegister() {
   const[bbtel, setBBtel] = useState("");
   const[bbemail, setBBemail] = useState("");
   const[bbpass, setBBpass] = useState("");
-  
+
+  function hashCode(string) {
+    var hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  };
 
   function test(){
     const valBBname = /^[a-zA-Z]{1,}\s?[a-zA-Z]{1,}$/;
@@ -18,27 +28,33 @@ function BBRegister() {
     const valBBtel = /^[0-9]{9}$/;
     const valBBemail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
     const valBBpass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$/;
-    
+    var error = "Podano nieprawidłowe dane w: ";
     if (valBBname.test(bbname) && valBBcity.test(bbcity) && valBBtel.test(bbtel) && valBBemail.test(bbemail) && valBBpass.test(bbpass)){
       console.log("ok")
+      //setBBpass(hashCode(bbpass))
       var data = {
         name: bbname,
         city: bbcity,
         tel: bbtel,
         email: bbemail,
-        pass: bbpass
+        pass: hashCode(bbpass)
       }
+      //setBBpass(hashCode(bbpass))
+      //console.log(hashCode(bbpass))
       //TODO check post
       BBDataService.createBB(data)
+      alert("Zarejestrowano pomyślnie")
       window.location.href = '/?resultReg=success';
     } else {
       console.log("wrong")
-      if (!valBBname.test(bbname)) console.log(bbname)
-      if (!valBBcity.test(bbcity)) console.log(bbcity)
-      if (!valBBtel.test(bbtel)) console.log(bbtel)
-      if (!valBBemail.test(bbemail)) console.log(bbemail)
-      if (!valBBpass.test(bbpass)) console.log(bbpass)
-      window.location.href = '/?resultReg=failed';
+      if (!valBBname.test(bbname)) error += "nazwie "
+      if (!valBBcity.test(bbcity)) error += "miejscowości "
+      if (!valBBtel.test(bbtel)) error += "telefonie "
+      if (!valBBemail.test(bbemail)) error += "mailu "
+      if (!valBBpass.test(bbpass)) error += "haśle"
+      error += "."
+      alert(error)
+      //window.location.href = '/?resultReg=failed';
     }
     //console.log(bbname)
     //console.log(bbcity)

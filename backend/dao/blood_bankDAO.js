@@ -62,7 +62,7 @@ export default class blood_bankDAO{
                 city: city,
                 tel: tel,
                 email: email,
-                pass: pass,
+                pass: pass
             }
             return await blood_bank.insertOne(Blood_bankDoc)
         } catch (e) {
