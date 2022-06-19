@@ -44,6 +44,7 @@ const BBLogin = props => {
        BBDataService.getBBByEmail(bbemail).then(response => 
         {
           console.log(response.data)
+          if(response.data.donors.length == 1){
           if(response.data.blood_banks[0].email == bbemail && response.data.blood_banks[0].pass == hashCode(bbpass))
           {
             console.log("zalogowany")
@@ -59,6 +60,9 @@ const BBLogin = props => {
             alert("Podano nieprawidłowy login lub hasło")
             console.log("niezalogowany")
           }
+        } else {
+          alert("Podano nieprawidłowy login lub hasło")
+        }
         })
         .catch(e =>
         {

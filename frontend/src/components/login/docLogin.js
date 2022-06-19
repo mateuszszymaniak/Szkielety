@@ -46,6 +46,7 @@ function try_login(){
 DDataService.getDByEmail(donemail).then(response => 
   {
     console.log(response.data);
+    if(response.data.donors.length == 1){
     if(response.data.donors[0].email == donemail && response.data.donors[0].pass == hashCode(donpass))
     {
       
@@ -62,6 +63,9 @@ DDataService.getDByEmail(donemail).then(response =>
       alert("Podano nieprawidłowy login lub hasło")
       console.log("niezalogowany")
     }
+  } else {
+    alert("Podano nieprawidłowy login lub hasło")
+  }
   })
   .catch(e =>
   {
