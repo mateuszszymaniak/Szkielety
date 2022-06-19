@@ -23,7 +23,7 @@ const BBLogin = props => {
   const valBBpass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$/;
   
   function try_login(){
-if (valBBemail.test(bbemail) && valBBpass.test(bbpass)){
+    if (valBBemail.test(bbemail) && valBBpass.test(bbpass)){
       console.log("ok")
       var data = {
         email: bbemail,
