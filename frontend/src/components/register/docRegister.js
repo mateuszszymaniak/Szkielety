@@ -12,6 +12,16 @@ function DocRegister() {
   const[donemail, setDemail] = useState("");
   const[donpass, setDpass] = useState("");
   
+  function hashCode(string) {
+    var hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  };
 
   function test(){
     const valDname = /^[a-zA-Z]{1,}\s?[a-zA-Z]{1,}$/;
@@ -29,10 +39,11 @@ function DocRegister() {
         city: doncity,
         tel: dontel,
         email: donemail,
-        pass: donpass
+        pass: hashCode(donpass)
       }
   //     //TODO check post
       DonorDataService.createD(data)
+      alert("Zarejestrowano pomyślnie")
       window.location.href = '/?resultReg=success';
     } else {
       console.log("wrong")

@@ -11,6 +11,17 @@ function BBRegister() {
   const[bbemail, setBBemail] = useState("");
   const[bbpass, setBBpass] = useState("");
 
+  function hashCode(string) {
+    var hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  };
+
   function test(){
     const valBBname = /^[a-zA-Z]{1,}\s?[a-zA-Z]{1,}$/;
     const valBBcity = /^[a-zA-Z]{1,}?\s|-?[a-zA-Z]{1,}$/;
@@ -20,15 +31,19 @@ function BBRegister() {
     var error = "Podano nieprawidłowe dane w: ";
     if (valBBname.test(bbname) && valBBcity.test(bbcity) && valBBtel.test(bbtel) && valBBemail.test(bbemail) && valBBpass.test(bbpass)){
       console.log("ok")
+      //setBBpass(hashCode(bbpass))
       var data = {
         name: bbname,
         city: bbcity,
         tel: bbtel,
         email: bbemail,
-        pass: bbpass
+        pass: hashCode(bbpass)
       }
+      //setBBpass(hashCode(bbpass))
+      //console.log(hashCode(bbpass))
       //TODO check post
       BBDataService.createBB(data)
+      alert("Zarejestrowano pomyślnie")
       window.location.href = '/?resultReg=success';
     } else {
       console.log("wrong")
