@@ -24,18 +24,30 @@ const DocLogin = props => {
   const valDemail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
   const valDpass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$/;
   
+  function hashCode(string) {
+    var hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  };
+
 function try_login(){  
   if (valDemail.test(donemail) && valDpass.test(donpass) ){
     console.log("ok")
     var data = {
       email: donemail,
-      pass: donpass
+      pass: hashCode(donpass)
     }
 //     //TODO check post
 DDataService.getDByEmail(donemail).then(response => 
   {
     console.log(response.data);
-    if(response.data.donors[0].email == donemail && response.data.donors[0].pass == donpass)
+    if(response.data.donors.length == 1){
+    if(response.data.donors[0].email == donemail && response.data.donors[0].pass == hashCode(donpass))
     {
       
       console.log("zalogowany")
@@ -43,12 +55,17 @@ DDataService.getDByEmail(donemail).then(response =>
       user.id=response.data.donors[0]._id
       user.type="D"
       // console.log(user);
+      alert("Zalogowano pomyślnie")
       login(user);
     }
     else
     {
+      alert("Podano nieprawidłowy login lub hasło")
       console.log("niezalogowany")
     }
+  } else {
+    alert("Podano nieprawidłowy login lub hasło")
+  }
   })
   .catch(e =>
   {

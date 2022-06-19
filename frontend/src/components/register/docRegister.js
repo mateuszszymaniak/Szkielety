@@ -12,6 +12,16 @@ function DocRegister() {
   const[donemail, setDemail] = useState("");
   const[donpass, setDpass] = useState("");
   
+  function hashCode(string) {
+    var hash = 0, i, chr;
+    if (string.length === 0) return hash;
+    for (i = 0; i < string.length; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  };
 
   function test(){
     const valDname = /^[a-zA-Z]{1,}\s?[a-zA-Z]{1,}$/;
@@ -20,7 +30,7 @@ function DocRegister() {
     const valDtel = /^[0-9]{9}$/;
     const valDemail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
     const valDpass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$/;
-    
+    var error = "Podano nieprawidłowe dane w: ";
     if (valDname.test(donname) && valDbloodgroup.test(blood_type) && valDtel.test(dontel) && valDcity.test(doncity) && valDemail.test(donemail) && valDpass.test(donpass) ){
       console.log("ok")
       var data = {
@@ -29,20 +39,23 @@ function DocRegister() {
         city: doncity,
         tel: dontel,
         email: donemail,
-        pass: donpass
+        pass: hashCode(donpass)
       }
   //     //TODO check post
       DonorDataService.createD(data)
+      alert("Zarejestrowano pomyślnie")
       window.location.href = '/?resultReg=success';
     } else {
       console.log("wrong")
-      if (!valDname.test(donname)) console.log(donname)
-      if (!valDbloodgroup.test(blood_type)) console.log(blood_type)
-      if (!valDtel.test(dontel)) console.log(dontel)
-      if (!valDcity.test(doncity)) console.log(doncity)
-      if (!valDemail.test(donemail)) console.log(donemail)
-      if (!valDpass.test(donpass) ) console.log(donpass)
-      window.location.href = '/?resultReg=failed';
+      if (!valDname.test(donname)) error += "danych dawcy "
+      if (!valDbloodgroup.test(blood_type)) error += "grupie krwi "
+      if (!valDtel.test(dontel)) error += "telefonie "
+      if (!valDcity.test(doncity)) error += "miejscowości "
+      if (!valDemail.test(donemail)) error += "mailu "
+      if (!valDpass.test(donpass) ) error += "haśle"
+      error += "."
+      alert(error)
+      //window.location.href = '/?resultReg=failed';
     }
   }
   
