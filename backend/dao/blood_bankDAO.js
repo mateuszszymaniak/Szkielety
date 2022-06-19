@@ -26,6 +26,11 @@ export default class blood_bankDAO{
                 query = {"name": {$eq: filters["name"]}}
             } else if ("city" in filters){
                 query = {"city": {$eq: filters["city"]}}
+            } else if ("email" in filters){
+                query = {"email": {$eq: filters["email"]}}
+            }
+            else if ("_id" in filters){
+                query = {"_id": {$eq: filters["_id"]}}
             }
         }
 
