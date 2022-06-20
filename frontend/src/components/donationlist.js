@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 function DonationList() {
 
-    const [bbid, setBbid] = useState(sessionStorage.getItem("_id"));
+    const [bbid, setBbid] = useState(localStorage.getItem("_id"));
     const [donationlist, setDono] = useState([]);
     const [doPokazania, setPokaz] = useState([])
 

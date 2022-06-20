@@ -6,7 +6,7 @@ import DonationDataService from "../services/donation"
 function MyProfile() {
 
 
-    const [did, setDid] = useState(sessionStorage.getItem("_id"));
+    const [did, setDid] = useState(localStorage.getItem("_id"));
 
     const [donationlist, setDono] = useState([]);
     const [bblist, setBBList] = useState([]);

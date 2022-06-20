@@ -2,7 +2,8 @@ import React from "react";
 import {Switch, Route, Link} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState} from "react";
-import DDataService from "../../services/donor.js"
+import DAuthService from "../../services/auth_d.js"
+import jwt_decode from "jwt-decode"
 
 const DocLogin = props => {
   let user = {
@@ -40,21 +41,22 @@ function try_login(){
     console.log("ok")
     var data = {
       email: donemail,
-      pass: hashCode(donpass)
+      password: hashCode(donpass)
     }
+    console.log(data)
 //     //TODO check post
-DDataService.getDByEmail(donemail).then(response => 
+DAuthService.authDonor(data).then(response => 
   {
-    console.log(response.data);
-    if(response.data.donors.length == 1){
-    if(response.data.donors[0].email == donemail && response.data.donors[0].pass == hashCode(donpass))
+    console.log(response.data)
+    if(response.data){
+    if(response.data.token)
     {
-      
+      let decode = jwt_decode(response.data.token)
       console.log("zalogowany")
-      user.name=response.data.donors[0].name
-      user.id=response.data.donors[0]._id
-      user.type="D"
-      // console.log(user);
+      user.name=decode.name
+      user.id=decode._id
+      user.type=decode.logged_type
+      user.token=response.data.token
       alert("Zalogowano pomyślnie")
       login(user);
     }
@@ -73,9 +75,7 @@ DDataService.getDByEmail(donemail).then(response =>
   })
  ;
   } else {
-    console.log("wrong")
-    if (!valDemail.test(donemail)) console.log(donemail)
-    if (!valDpass.test(donpass) ) console.log(donpass)
+    alert("Podano nieprawidłowy login lub hasło")
   }
 }
 

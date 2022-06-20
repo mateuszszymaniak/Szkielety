@@ -13,6 +13,7 @@ const Login = props => {
         name: "",
         id: "",
         type: "NL",
+        token: ""
       };
     
       const [user, setUser] = useState(initialUserState);
