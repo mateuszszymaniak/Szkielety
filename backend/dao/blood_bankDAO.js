@@ -47,7 +47,6 @@ export default class blood_bankDAO{
         try{
             const blood_banksList = await displayCursor.toArray()
             const totalNumBlood_banks = await blood_bank.countDocuments(query)
-
             return {blood_banksList, totalNumBlood_banks}
         } catch (e) {
             console.error(`Unable to convert cursor to array or problem counting documents, ${e}`)

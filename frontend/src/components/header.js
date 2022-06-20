@@ -10,7 +10,7 @@ import logo from "../images/logo.jpg"
 function Header() {
     var result = null;
 
-    const logged_type = sessionStorage.getItem("login_type");
+    const logged_type = localStorage.getItem("login_type");
     if (logged_type == "BB") {
         result =
             <ul class="navbar-nav ml-auto">

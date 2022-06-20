@@ -26,9 +26,9 @@ router.route("/donation")
     .delete(donations_Ctrl.apiDeleteDonations)
 
 router.route("/donor_auth")
-    .get(donors_Auth.apiAuthDonor)
+    .post(donors_Auth.apiAuthDonor)
 
 router.route("/bank_auth")
-    .get(bank_Auth.apiAuthBank)
+    .post(bank_Auth.apiAuthBank)
 
 export default router

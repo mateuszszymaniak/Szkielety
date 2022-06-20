@@ -1,13 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState} from "react";
-import BBDataService from "../../services/bloodbank.js"
-
+import BBAuthService from "../../services/auth_bb.js";
+import jwt_decode from "jwt-decode"
+ 
 const BBLogin = props => {
   let user = {
     name: "",
     id: "",
     type: "NL",
+    token: "",
   };
 
   const login = (par) =>
@@ -38,21 +40,22 @@ const BBLogin = props => {
       console.log("ok")
       var data = {
         email: bbemail,
-        pass: hashCode(bbpass)
+        password: hashCode(bbpass)
       }
-      //TODO check post
-       BBDataService.getBBByEmail(bbemail).then(response => 
+       BBAuthService.authBank(data).then(response => 
         {
           console.log(response.data)
-          if(response.data.blood_banks.length == 1){
-          if(response.data.blood_banks[0].email == bbemail && response.data.blood_banks[0].pass == hashCode(bbpass))
+          if(response.data){
+          if(response.data.token)
           {
+            let decode = jwt_decode(response.data.token)
             console.log("zalogowany")
-            user.name=response.data.blood_banks[0].name
-            user.id=response.data.blood_banks[0]._id
-            user.type="BB"
-            // console.log(user);
+            user.name=decode.name
+            user.id=decode._id
+            user.type=decode.logged_type
+            user.token=response.data.token
             alert("Zalogowano pomyślnie")
+            // console.log(user)
             login(user);
           }
           else
@@ -71,9 +74,7 @@ const BBLogin = props => {
        ;
 
     } else {
-      console.log("wrong")
-      if (!valBBemail.test(bbemail)) console.log(bbemail)
-      if (!valBBpass.test(bbpass)) console.log(bbpass)
+      alert("Podano nieprawidłowy login lub hasło")
     }
     //console.log(bbname)
     //console.log(bbcity)

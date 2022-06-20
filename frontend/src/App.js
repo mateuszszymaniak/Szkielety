@@ -19,17 +19,19 @@ function App() {
   async function login(user = null) {
     // console.log(user);
     setUser(user);
-    sessionStorage.setItem("name", user.name)
-    sessionStorage.setItem("_id", user.id)
-    sessionStorage.setItem("login_type", user.type)
+    localStorage.setItem("name", user.name)
+    localStorage.setItem("_id", user.id)
+    localStorage.setItem("login_type", user.type)
+    localStorage.setItem("token", user.token)
     window.location.href = '/';
   }
 
   function logout() {
     setUser(null);
-    sessionStorage.setItem("name", "")
-    sessionStorage.setItem("_id", "")
-    sessionStorage.setItem("login_type", "NL")
+    localStorage.setItem("name", "")
+    localStorage.setItem("_id", "")
+    localStorage.setItem("login_type", "NL")
+    localStorage.setItem("token", "")
     window.location.href = '/';
   }
 
@@ -43,7 +45,7 @@ function App() {
 
           </li>
           <ul class="navbar-nav ml-auto jz">
-            {(sessionStorage.getItem("login_type") == "NL" || sessionStorage.getItem("login_type") == null ) ? (
+            {(localStorage.getItem("login_type") == "NL" || localStorage.getItem("login_type") == null ) ? (
               <>
 
                 <li className="nav-item">
@@ -62,7 +64,7 @@ function App() {
 
               <li className="nav-item">
                 <a onClick={logout} className="nav-link" style={{ cursor: 'pointer' }}>
-                  Wyloguj {sessionStorage.getItem("name")}
+                  Wyloguj {localStorage.getItem("name")}
                 </a>
               </li>
             )}

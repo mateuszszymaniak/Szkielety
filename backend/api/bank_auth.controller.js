@@ -3,31 +3,35 @@ import jwt from "jsonwebtoken"
 
 export default class BankAuthController {
     static async apiAuthBank(req, res, next) {
-        const email = req.query.email
-        const pass = req.query.password
+        const email = req.body.email
+        const pass = req.body.password
         let secret = "secret-key"
 
         
         let filters = {}
-        if (req.query.email) {
-            filters.email = req.query.email
+        if (req.body.email) {
+            filters.email = req.body.email
         }
-
-        const { bankList, totalNumBanks } = await blood_bankDAO.getDonors({
+        const { blood_banksList, totalNumBanks } = await blood_bankDAO.getBlood_banks({
             filters: filters
         })
-
-        if (email === bankList[0].email && pass == bankList[0].pass) {
-            var token = jwt.sign({id: bankList[0]._id}, secret,
+        if(blood_banksList == 0 ) 
+        {
+            return res.json({
+                token: ""})
+        }
+        if (email === blood_banksList[0].email && pass == blood_banksList[0].pass) {
+            var token = jwt.sign({
+                email: blood_banksList[0].email,
+                _id: blood_banksList[0]._id,
+                name: blood_banksList[0].name,
+                logged_type: "BB",
+            }, secret,
                 {
                     expiresIn:86400
                 })
             var response = {
-                email: bankList[0].email,
-                _id: bankList[0]._id,
                 token: token,
-                logged_type: "D",
-                filters: filters
             }
         }
         res.json(response)
